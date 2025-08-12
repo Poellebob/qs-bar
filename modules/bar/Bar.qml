@@ -13,7 +13,7 @@ PanelWindow {
     right: true
   }
   
-  implicitHeight: 30
+  implicitHeight: 20
   
   Rectangle {
     anchors.fill: parent
@@ -30,7 +30,8 @@ PanelWindow {
       Text {
         text: "󰣇"
         color: "white"
-        font.pixelSize: 22
+        font.pixelSize: 24
+        anchors.verticalCenter: parent.verticalCenter
       }
 
       Systray {

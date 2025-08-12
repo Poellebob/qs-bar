@@ -11,8 +11,11 @@ MouseArea {
     property var bar: root.QsWindow.window
     required property SystemTrayItem item
     property bool targetMenuOpen: false
-    property int trayItemWidth: Appearance.font.pixelSize.larger
+    property int trayItemWidth: 18
 
+    anchors {
+        verticalCenter: parent.verticalCenter
+    }
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     Layout.fillHeight: true
     implicitWidth: trayItemWidth
@@ -41,7 +44,7 @@ MouseArea {
 
     IconImage {
         id: trayIcon
-        visible: !Config.options.bar.tray.monochromeIcons
+        visible: true
         source: root.item.icon
         anchors.centerIn: parent
         width: parent.width
@@ -49,7 +52,7 @@ MouseArea {
     }
 
     Loader {
-        active: Config.options.bar.tray.monochromeIcons
+        active: true
         anchors.fill: trayIcon
         sourceComponent: Item {
             Desaturate {
@@ -62,7 +65,7 @@ MouseArea {
             ColorOverlay {
                 anchors.fill: desaturatedIcon
                 source: desaturatedIcon
-                color: ColorUtils.transparentize(Appearance.colors.colOnLayer0, 0.9)
+                color: "transparent"
             }
         }
     }

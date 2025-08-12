@@ -5,15 +5,16 @@ import Quickshell.Services.SystemTray
 Item {
     id: root
 
-    height: parent.height
+    anchors {
+        verticalCenter: parent.verticalCenter
+    }
     implicitWidth: rowLayout.implicitWidth
-    Layout.leftMargin: Appearance.rounding.screenRounding
 
     RowLayout {
         id: rowLayout
 
         anchors.fill: parent
-        spacing: 15
+        spacing: 4
 
         Repeater {
             model: SystemTray.items
