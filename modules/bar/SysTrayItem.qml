@@ -11,7 +11,7 @@ MouseArea {
     property var bar: root.QsWindow.window
     required property SystemTrayItem item
     property bool targetMenuOpen: false
-    property int trayItemWidth: 18
+    property int trayItemWidth: 16
 
     anchors {
         verticalCenter: parent.verticalCenter
@@ -36,10 +36,10 @@ MouseArea {
 
         menu: root.item.menu
         anchor.window: bar
-        anchor.rect.x: root.x + bar.width
-        anchor.rect.y: root.y
-        anchor.rect.height: root.height
-        anchor.edges: Edges.Bottom
+        anchor.rect.x: root.x 
+        anchor.rect.y: rowLayout.y + rowLayout.implicitHeight
+        anchor.rect.height: systrayRow.height
+        anchor.edges: Edges.Top
     }
 
     IconImage {
@@ -57,10 +57,10 @@ MouseArea {
         sourceComponent: Item {
             Desaturate {
                 id: desaturatedIcon
-                visible: false // There's already color overlay
+                visible: false
                 anchors.fill: parent
                 source: trayIcon
-                desaturation: 0.8 // 1.0 means fully grayscale
+                desaturation: 0.8
             }
             ColorOverlay {
                 anchors.fill: desaturatedIcon

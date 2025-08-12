@@ -6,14 +6,16 @@ import Quickshell
 
 PanelWindow {
   id: panel
+
+  property int icon_size: 24
+  
+  implicitHeight: 30
   
   anchors {
     top: true
     left: true
     right: true
   }
-  
-  implicitHeight: 20
   
   Rectangle {
     anchors.fill: parent
@@ -30,7 +32,7 @@ PanelWindow {
       Text {
         text: "󰣇"
         color: "white"
-        font.pixelSize: 24
+        font.pixelSize: panel.icon_size
         anchors.verticalCenter: parent.verticalCenter
       }
 
@@ -39,6 +41,24 @@ PanelWindow {
         anchors.left: parent.left
         anchors.leftMargin: 38 // adjust margin as needed
       }
+    }
+
+    Row {
+      anchors {
+        right: parent.right
+        rightMargin: 8
+        verticalCenter: parent.verticalCenter
+      }
+      spacing: 16
+
+      Text {
+        text: "idk"
+        color: "white"
+        font.pixelSize: panel.icon_size
+        anchors.verticalCenter: parent.verticalCenter
+      }
+
+      // Add other items like clock, battery, etc. here
     }
   }
 }
