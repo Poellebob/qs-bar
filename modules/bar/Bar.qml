@@ -4,61 +4,60 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
+import QtQuick
+import QtQuick.Layouts
+import Quickshell
+
 PanelWindow {
-  id: panel
+	id: panel
+	implicitHeight: 30
 
-  property int icon_size: 24
-  
-  implicitHeight: 30
-  
-  anchors {
-    top: true
-    left: true
-    right: true
-  }
-  
-  Rectangle {
-    anchors.fill: parent
-    color: "#161616"
+	property int icon_size: 24
+	property int text_size: 13
+	property int module_height: implicitHeight - 8
+	property int module_radius: 4
 
-    Row {
-      anchors{
-        left: parent.left
-        leftMargin: 8
-        verticalCenter: parent.verticalCenter
-      }
-      spacing: 16
+	anchors {
+		top: true
+		left: true
+		right: true
+	}
+	
+	Rectangle {
+		anchors.fill: parent
+		color: "#161616"
 
-      Text {
-        text: "󰣇"
-        color: "white"
-        font.pixelSize: panel.icon_size
-        anchors.verticalCenter: parent.verticalCenter
-      }
+		RowLayout {
+			anchors {
+				left: parent.left
+				leftMargin: 8
+				verticalCenter: parent.verticalCenter
+			}
+			spacing: 16
 
-      Systray {
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.left: parent.left
-        anchors.leftMargin: 38 // adjust margin as needed
-      }
-    }
+			Text {
+				text: "󰣇"
+				color: "white"
+				font.pixelSize: panel.text_size + 12
+				Layout.alignment: Qt.AlignVCenter
+			}
 
-    Row {
-      anchors {
-        right: parent.right
-        rightMargin: 8
-        verticalCenter: parent.verticalCenter
-      }
-      spacing: 16
+			Systray {
+				Layout.alignment: Qt.AlignVCenter
+			}
+		}
 
-      Text {
-        text: "idk"
-        color: "white"
-        font.pixelSize: panel.icon_size
-        anchors.verticalCenter: parent.verticalCenter
-      }
+		RowLayout {
+			anchors {
+				right: parent.right
+				rightMargin: 8
+				verticalCenter: parent.verticalCenter
+			}
+			spacing: 16
 
-      // Add other items like clock, battery, etc. here
-    }
-  }
+			Pager {
+				Layout.alignment: Qt.AlignVCenter
+			}
+		}
+	}
 }

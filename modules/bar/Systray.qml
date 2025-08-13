@@ -3,36 +3,40 @@ import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 
 Item {
-  id: root
+  id: systray
+  implicitHeight: rect.implicitHeight
+  implicitWidth: rect.implicitWidth
 
-  anchors {
-    verticalCenter: parent.verticalCenter
-  }
-  implicitHeight: rowLayout.implicitHeight
+  Rectangle {
+    id: rect
+    color: "#636363"
+    radius: 4
+    anchors.centerIn: parent
 
-  RowLayout {
-    id: rowLayout
+    // Let size follow RowLayout + margins
+    implicitWidth: rowLayout.implicitWidth + 8
+    implicitHeight: panel.module_height
 
-    anchors.fill: parent
-    spacing: 4
-    Repeater {
+    RowLayout {
+      id: rowLayout
+      anchors.margins: 4
+      anchors.fill: parent
+      spacing: 4
+
+      Repeater {
         model: SystemTray.items
-
         SysTrayItem {
-            required property SystemTrayItem modelData
-            item: modelData
+          required property SystemTrayItem modelData
+          item: modelData
         }
+      }
 
-    }
-
-    Text {
-      Layout.alignment: Qt.AlignVCenter
-      font.pixelSize: Appearance.font.pixelSize.larger
-      color: Appearance.colors.colSubtext
-      visible: {
-          SystemTray.items.values.length > 0
+      Text {
+        Layout.alignment: Qt.AlignVCenter
+        font.pixelSize: Appearance.font.pixelSize.larger
+        color: Appearance.colors.colSubtext
+        visible: SystemTray.items.values.length > 0
       }
     }
   }
-} 
-
+}
