@@ -1,63 +1,76 @@
-//import qs.modules.common
-//import qs.modules.common.functions
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
-import QtQuick
-import QtQuick.Layouts
-import Quickshell
+Variants {
+  model: Quickshell.screens
 
-PanelWindow {
-	id: panel
-	implicitHeight: 30
+  PanelWindow {
+    id: panel
+    required property var modelData
+    screen: modelData
 
-	property int icon_size: 24
-	property int text_size: 13
-	property int module_height: implicitHeight - 8
-	property int module_radius: 4
+    implicitHeight: 30
 
-	anchors {
-		top: true
-		left: true
-		right: true
-	}
-	
-	Rectangle {
-		anchors.fill: parent
-		color: "#161616"
+    property int icon_size: 24
+    property int text_size: 13
+    property int module_height: implicitHeight - 8
+    property int module_radius: 4
 
-		RowLayout {
-			anchors {
-				left: parent.left
-				leftMargin: 8
-				verticalCenter: parent.verticalCenter
-			}
-			spacing: 16
+    anchors {
+      top: true
+      left: true
+      right: true
+    }
+    
+    Rectangle {
+      anchors.fill: parent
+      color: "#161616"
 
-			Text {
-				text: "󰣇"
-				color: "white"
-				font.pixelSize: panel.text_size + 12
-				Layout.alignment: Qt.AlignVCenter
-			}
+      RowLayout {
+        anchors {
+          left: parent.left
+          leftMargin: 8
+          verticalCenter: parent.verticalCenter
+        }
+        spacing: 16
 
-			Systray {
-				Layout.alignment: Qt.AlignVCenter
-			}
-		}
+        Text {
+          text: "󰣇"
+          color: "white"
+          font.pixelSize: panel.text_size + 12
+          Layout.alignment: Qt.AlignVCenter
+        }
 
-		RowLayout {
-			anchors {
-				right: parent.right
-				rightMargin: 8
-				verticalCenter: parent.verticalCenter
-			}
-			spacing: 16
+        Systray {
+          Layout.alignment: Qt.AlignVCenter
+        }
+      }
 
-			Pager {
-				Layout.alignment: Qt.AlignVCenter
-			}
-		}
-	}
+      RowLayout {
+        anchors {
+          horizontalCenter: parent.horizontalCenter
+          verticalCenter: parent.verticalCenter
+        }
+        spacing: 16
+
+        Clock {
+          Layout.alignment: Qt.AlignVCenter
+        }
+      }
+
+      RowLayout {
+        anchors {
+          right: parent.right
+          rightMargin: 8
+          verticalCenter: parent.verticalCenter
+        }
+        spacing: 16
+
+        Pager {
+          Layout.alignment: Qt.AlignVCenter
+        }
+      }
+    }
+  }
 }
