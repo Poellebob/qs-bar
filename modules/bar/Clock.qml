@@ -5,25 +5,25 @@ import Quickshell
 Item {
   id: clockRoot
   implicitHeight: rect.implicitHeight
-	implicitWidth: rect.implicitWidth
-
-  property string clock: "00:00"
+  implicitWidth: rect.implicitWidth
 
   Rectangle {
     id: rect
     implicitHeight: panel.module_height
-    implicitWidth: text.implicitWidth +8
+    implicitWidth: text.implicitWidth + 8
     color: "#636363"
-		radius: 4
+    radius: 4
 
     Text {
       id: text
-      text: clockRoot.clock
+      text: Qt.formatDateTime(clock.date, "HH:mm")
       color: "white"
-      anchors {
-        verticalCenter: parent.verticalCenter
-        horizontalCenter: parent.horizontalCenter
-      }
+      anchors.centerIn: parent
     }
+  }
+
+  SystemClock {
+    id: clock
+    precision: SystemClock.Seconds
   }
 }

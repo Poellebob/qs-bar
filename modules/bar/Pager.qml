@@ -28,7 +28,7 @@ Item {
         model: Hyprland.workspaces
         delegate: Rectangle {
           visible: modelData.id >= 1
-          color: modelData.active ? "#ffffff" : "#aaaaaa"
+          color: modelData.active ?"#aaaaaa" : "#ffffff"
           
           implicitHeight: panel.module_height-4
           implicitWidth: implicitHeight
