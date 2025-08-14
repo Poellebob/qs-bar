@@ -33,7 +33,7 @@ Variants {
           leftMargin: 8
           verticalCenter: parent.verticalCenter
         }
-        spacing: 16
+        spacing: 8
 
         Text {
           text: "󰣇"
@@ -52,7 +52,11 @@ Variants {
           horizontalCenter: parent.horizontalCenter
           verticalCenter: parent.verticalCenter
         }
-        spacing: 16
+        spacing: 8
+
+        Battery {
+          Layout.alignment: Qt.AlignVCenter
+        }
 
         Clock {
           Layout.alignment: Qt.AlignVCenter
@@ -65,7 +69,7 @@ Variants {
           rightMargin: 8
           verticalCenter: parent.verticalCenter
         }
-        spacing: 16
+        spacing: 8
 
         Pager {
           Layout.alignment: Qt.AlignVCenter
