@@ -31,7 +31,6 @@ Item {
 
       Text {
         id: percentageText
-        font.bold: true
         text: UPower.displayDevice.ready
               ? Math.round(UPower.displayDevice.percentage) + "%"
               : "—"
