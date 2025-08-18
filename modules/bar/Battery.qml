@@ -24,16 +24,14 @@ Item {
       spacing: 2
 
       Text {
-        text: "󰁹"
+        text: batteryRoot.batteryIcon(UPower.displayDevice.iconName)
         color: "white"
         horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
         id: percentageText
-        text: UPower.displayDevice.ready
-              ? Math.round(UPower.displayDevice.percentage) + "%"
-              : "—"
+        text: "NaN%"
         color: "white"
         horizontalAlignment: Text.AlignHCenter
       }
@@ -48,6 +46,24 @@ Item {
       // Force property refresh
       percentageText.text = UPower.displayDevice.ready
         ? Math.round(UPower.displayDevice.percentage * 100) + "%" : "—"
+    }
+  }
+  function batteryIcon(name) {
+    switch (name) {
+    case "battery-empty-symbolic":
+        return "󰂎";
+    case "battery-caution-symbolic":
+        return "󰂃";
+    case "battery-low-symbolic":
+        return "󱊡";
+    case "battery-good-symbolic":
+        return "󱊢";
+    case "battery-full-symbolic":
+        return "󱊣";
+    case "battery-charging-symbolic":
+        return "󰂄";
+    default:
+        return "󰁹";
     }
   }
 }
