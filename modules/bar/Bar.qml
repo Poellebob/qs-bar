@@ -6,6 +6,6 @@ Instantiator {
   model: Quickshell.screens
 
   delegate: Panel {
-    item: modelData
+    screen: modelData
   }
 }

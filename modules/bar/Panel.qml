@@ -4,10 +4,7 @@ import Quickshell
 
 PanelWindow {
   id: panel
-
-  required property var item
-  screen: item
-
+  
   implicitHeight: 30
 
   property int icon_size: 24

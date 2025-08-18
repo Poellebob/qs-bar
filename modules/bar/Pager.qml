@@ -30,7 +30,7 @@ Item {
           visible: (panel.screen.name === modelData.monitor.name) && modelData.id >= 1
           color: modelData.active ? "#aaaaaa" : "#ffffff"
           
-          implicitHeight: panel.module_height-4
+          implicitHeight: panel.module_height - 4
           implicitWidth: implicitHeight
           anchors.verticalCenter: parent.verticalCenter
           radius: panel.module_radius
