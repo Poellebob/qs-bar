@@ -7,6 +7,7 @@ Item {
   id: batteryRoot
   implicitHeight: rect.implicitHeight
   implicitWidth: rect.implicitWidth
+  visible: UPower.displayDevice.percentage == 0 ? false : true
 
   Rectangle {
     id: rect
