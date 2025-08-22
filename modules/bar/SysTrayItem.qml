@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Qt5Compat.GraphicalEffects
+import "../widgets"
 
 MouseArea {
   id: sysTrayItem

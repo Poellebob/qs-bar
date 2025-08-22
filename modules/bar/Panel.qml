@@ -49,6 +49,10 @@ PanelWindow {
       }
       spacing: 8
 
+      Audio {
+        Layout.alignment: Qt.AlignCenter
+      }
+
       Battery {
         Layout.alignment: Qt.AlignVCenter
       }
