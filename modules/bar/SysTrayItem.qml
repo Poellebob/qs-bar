@@ -26,7 +26,7 @@ MouseArea {
     switch (event.button) {
       case Qt.LeftButton:
         item.activate();
-      break;
+      break; 
 
       case Qt.RightButton:
         if (item.hasMenu) menu.open();
@@ -61,7 +61,7 @@ MouseArea {
     sourceComponent: Item {
     Desaturate {
         id: desaturatedIcon
-        visible: false
+        visible: true
         anchors.fill: parent
         source: trayIcon
         desaturation: 0.8
@@ -69,7 +69,7 @@ MouseArea {
       ColorOverlay {
         anchors.fill: desaturatedIcon
         source: desaturatedIcon
-        color: "transparent"
+        color: panel.colors.dark_on_surface_variant
       }
     }
   }

@@ -13,9 +13,9 @@ Item {
 
   Rectangle {
     id: rect
-    color: "#636363"
+    color: panel.colors.dark_surface_variant
     radius: 4
-    implicitHeight: panel.module_height
+    implicitHeight: panel.format.module_height
     implicitWidth: row.implicitWidth + 8
 
     RowLayout {
@@ -33,8 +33,8 @@ Item {
             : defaultNode && defaultNode.audio.volume >= 0.33
             ? " 󰖀"
             : " 󰕿")
-        font.pixelSize: panel.text_size
-        color: "white"
+        font.pixelSize: panel.format.text_size
+        color: panel.colors.dark_on_surface_variant
       }
 
       Text {
@@ -42,8 +42,8 @@ Item {
         text: defaultNode
           ? Math.round(defaultNode.audio.volume * 100) + "%"
           : "—"
-        font.pixelSize: panel.text_size
-        color: "white"
+        font.pixelSize: panel.format.text_size
+        color: panel.colors.dark_on_surface_variant
       }
 
       MouseArea {

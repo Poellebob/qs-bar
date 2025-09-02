@@ -1,17 +1,17 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import "../format/"
+
+import "../colors/"
 
 PanelWindow {
   id: panel
-  
-  property int icon_size: 24
-  property int text_size: 13
-  property int module_height: implicitHeight - 8
-  property int module_radius: 4
-  property int panel_hight: 30
 
-  implicitHeight: panel_hight
+  readonly property Format format: Format {}
+  readonly property Colors colors: Colors {}
+
+  implicitHeight: format.panel_hight
 
   anchors {
     top: true
@@ -21,7 +21,7 @@ PanelWindow {
   
   Rectangle {
     anchors.fill: parent
-    color: "#161616"
+    color: panel.colors.dark_background
 
     RowLayout {
       anchors {
@@ -33,7 +33,7 @@ PanelWindow {
 
       Text {
         text: "󰣇"
-        color: "white"
+        color: panel.colors.dark_on_background
         font.pixelSize: panel.text_size + 12
         Layout.alignment: Qt.AlignVCenter
       }

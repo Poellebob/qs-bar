@@ -13,10 +13,10 @@ Item {
 
   Rectangle {
     id: rect
-    color: "#636363"
+    color: panel.colors.dark_surface_variant
     radius: 4
     implicitWidth: row.implicitWidth + 8
-    implicitHeight: panel.module_height
+    implicitHeight: panel.format.module_height
 
     RowLayout {
       id: row
@@ -28,17 +28,17 @@ Item {
         model: Hyprland.workspaces
         delegate: Rectangle {
           visible: (panel.screen.name === modelData.monitor.name) && modelData.id >= 1
-          color: modelData.active ? "#aaaaaa" : "#ffffff"
+          color: modelData.active ? panel.colors.dark_primary : panel.colors.dark_secondary
           
-          implicitHeight: panel.module_height - 4
+          implicitHeight: panel.format.module_height - 4
           implicitWidth: implicitHeight
           anchors.verticalCenter: parent.verticalCenter
-          radius: panel.module_radius
+          radius: panel.format.module_radius
 
           Text{
-            font.pixelSize: panel.text_size
+            font.pixelSize: panel.format.text_size
             text: modelData.id
-            color: "black"
+            color: panel.colors.dark_on_primary
             anchors.horizontalCenter: parent.horizontalCenter
           }
           

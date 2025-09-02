@@ -9,13 +9,13 @@ Item {
 
   Rectangle {
     id: rect
-    color: "#636363"
+    color: panel.colors.dark_surface_variant
     radius: 4
     anchors.centerIn: parent
 
     // Let size follow RowLayout + margins
     implicitWidth: rowLayout.implicitWidth + 8
-    implicitHeight: panel.module_height
+    implicitHeight: panel.format.module_height
 
     RowLayout {
       id: rowLayout

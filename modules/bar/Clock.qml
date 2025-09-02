@@ -9,15 +9,15 @@ Item {
 
   Rectangle {
     id: rect
-    implicitHeight: panel.module_height
+    implicitHeight: panel.format.module_height
     implicitWidth: text.implicitWidth + 8
-    color: "#636363"
+    color: panel.colors.dark_surface_variant
     radius: 4
 
     Text {
       id: text
       text: Qt.formatDateTime(clock.date, "HH:mm")
-      color: "white"
+      color: panel.colors.dark_on_surface_variant
       anchors.centerIn: parent
     }
   }

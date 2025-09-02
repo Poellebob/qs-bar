@@ -12,11 +12,11 @@ Item {
   Rectangle {
     id: rect
     anchors.centerIn: parent
-    implicitHeight: panel.module_height
+    implicitHeight: panel.format.module_height
     implicitWidth: column.implicitWidth + 16
-    color: "#636363"
+    color: panel.colors.dark_surface_variant
     radius: 4
-    border.color: "#ffff00"
+    border.color: panel.colors.dark_primary
     border.width: UPower.onBattery ? 0 : 1
 
     RowLayout {
@@ -26,14 +26,14 @@ Item {
 
       Text {
         text: batteryRoot.batteryIcon(UPower.displayDevice.iconName)
-        color: "white"
+        color: panel.colors.dark_on_surface_variant
         horizontalAlignment: Text.AlignHCenter
       }
 
       Text {
         id: percentageText
         text: "NaN%"
-        color: "white"
+        color: panel.colors.dark_on_surface_variant
         horizontalAlignment: Text.AlignHCenter
       }
     }
