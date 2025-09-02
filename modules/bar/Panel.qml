@@ -5,12 +5,13 @@ import Quickshell
 PanelWindow {
   id: panel
   
-  implicitHeight: 30
-
   property int icon_size: 24
   property int text_size: 13
   property int module_height: implicitHeight - 8
   property int module_radius: 4
+  property int panel_hight: 30
+
+  implicitHeight: panel_hight
 
   anchors {
     top: true
