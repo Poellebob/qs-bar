@@ -27,6 +27,7 @@ Item {
       Text {
         text: batteryRoot.batteryIcon(UPower.displayDevice.iconName)
         color: panel.colors.dark_on_surface_variant
+        font.pixelSize: panel.format.text_size
         horizontalAlignment: Text.AlignHCenter
       }
 
@@ -34,6 +35,7 @@ Item {
         id: percentageText
         text: "NaN%"
         color: panel.colors.dark_on_surface_variant
+        font.pixelSize: panel.format.text_size
         horizontalAlignment: Text.AlignHCenter
       }
     }

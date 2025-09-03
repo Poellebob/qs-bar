@@ -2,7 +2,6 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import "../format/"
-
 import "../colors/"
 
 PanelWindow {
@@ -34,7 +33,7 @@ PanelWindow {
       Text {
         text: "󰣇"
         color: panel.colors.dark_on_background
-        font.pixelSize: panel.text_size + 12
+        font.pixelSize: panel.format.icon_size
         Layout.alignment: Qt.AlignVCenter
       }
 

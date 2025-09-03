@@ -18,6 +18,7 @@ Item {
       id: text
       text: Qt.formatDateTime(clock.date, "HH:mm")
       color: panel.colors.dark_on_surface_variant
+      font.pixelSize: panel.format.text_size
       anchors.centerIn: parent
     }
   }
