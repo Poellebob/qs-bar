@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Services.SystemTray
-import qs.colors
 
 Item {
   id: systray

@@ -46,17 +46,6 @@ Item {
         font.pixelSize: panel.format.text_size
         color: panel.colors.dark_on_surface_variant
       }
-
-      MouseArea {
-        anchors.fill: parent
-        onClicked: if (defaultNode) defaultNode.audio.muted = !defaultNode.audio.muted
-        onWheel: {
-          if (!defaultNode) return
-          const delta = wheel.angleDelta.y > 0 ? 0.05 : -0.05
-          defaultNode.audio.volume = Math.max(0.0, Math.min(1.0, defaultNode.audio.volume + delta))
-        }
-      }
     }
   }
-
 }

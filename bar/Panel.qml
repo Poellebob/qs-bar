@@ -60,6 +60,15 @@ PanelWindow {
       Clock {
         Layout.alignment: Qt.AlignVCenter
       }
+
+      MouseArea {
+        onClicked: (event) => {
+          if (event.button == Qt.LeftButton) {
+            centerMenu.visible = !centerMenu.visible
+          }
+        }
+        anchors.fill: parent
+      }
     }
 
     RowLayout {
@@ -74,5 +83,9 @@ PanelWindow {
         Layout.alignment: Qt.AlignVCenter
       }
     }
+  }
+
+  CenterMenu {
+    id: centerMenu
   }
 }
