@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.Pipewire
 import Quickshell.Widgets
+import qs.colors
 
 Item {
   id: audioRoot

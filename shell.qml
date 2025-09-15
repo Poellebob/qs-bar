@@ -1,8 +1,7 @@
 //@ pragma UseQApplication
 import QtQuick
 import Quickshell
-
-import "./modules/bar/";
+import qs.bar
 
 ShellRoot {
   id: root

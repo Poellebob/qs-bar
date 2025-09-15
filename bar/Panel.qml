@@ -1,8 +1,8 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
-import "../format/"
-import "../colors/"
+import qs.format
+import qs.colors
 
 PanelWindow {
   id: panel

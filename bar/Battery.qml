@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Services.UPower
+import qs.colors
 
 Item {
   id: batteryRoot
