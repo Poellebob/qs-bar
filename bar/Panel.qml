@@ -67,7 +67,10 @@ PanelWindow {
             centerMenu.visible = !centerMenu.visible
           }
         }
-        anchors.fill: parent
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.verticalCenter: parent.verticalCenter
+        implicitHeight: panel.height
       }
     }
 

@@ -29,7 +29,10 @@ MouseArea {
       break; 
 
       case Qt.RightButton:
-        if (item.hasMenu) menu.visible = !menu.visible;
+        if (item.hasMenu) {
+          menu.visible = !menu.visible;
+          hideTimer.restart();
+        }
       break;
     }
     event.accepted = true;
@@ -65,63 +68,61 @@ MouseArea {
       
       onEntered: hideTimer.stop()
       onExited: hideTimer.restart()
+    }
+
+    Rectangle {
+      id: rect
+      color: panel.colors.dark_background
+      implicitWidth: parent.width
+      implicitHeight: parent.height
+      bottomLeftRadius: 16
+      bottomRightRadius: 16
       
-      Rectangle {
-        id: rect
-        color: panel.colors.dark_background
-        implicitWidth: parent.width
-        implicitHeight: parent.height
-        bottomLeftRadius: 16
-        bottomRightRadius: 16
+      ColumnLayout {
+        id: items
+        spacing: 6
+        anchors.horizontalCenter: parent.horizontalCenter
         
-        ColumnLayout {
-          id: items
-          spacing: 6
-          anchors.horizontalCenter: parent.horizontalCenter
+        Repeater {
+          model: menuOpen.children
           
-          Repeater {
-            model: menuOpen.children
+          Rectangle {
+            required property QsMenuEntry modelData
+            color: mouseArea.containsMouse && !modelData.isSeparator ? panel.colors.dark_surface_container_high : panel.colors.dark_inverse_on_surface
+            anchors.horizontalCenter: parent.horizontalCenter
+            implicitWidth: menu.width - 12
+            implicitHeight: modelData.isSeparator ? 2 : 25
+            radius: 12
             
-            Rectangle {
-              required property QsMenuEntry modelData
-              color: mouseArea.containsMouse && !modelData.isSeparator ?
-                    panel.colors.dark_surface_container_high :
-                    panel.colors.dark_inverse_on_surface
-              anchors.horizontalCenter: parent.horizontalCenter
-              implicitWidth: menu.width - 12
-              implicitHeight: modelData.isSeparator ? 2 : 30
-              radius: 12
-              
-              // Smooth color transition
-              Behavior on color {
-                ColorAnimation {
-                  duration: 150
-                  easing.type: Easing.OutCubic
-                }
+            // Smooth color transition
+            Behavior on color {
+              ColorAnimation {
+                duration: 150
+                easing.type: Easing.OutCubic
               }
+            }
+            
+            Text {
+              visible: !modelData.isSeparator
+              anchors.fill: parent
+              color: panel.colors.dark_on_background
+              text: modelData.text
+              anchors.left: parent.left
+              anchors.leftMargin: 10
+              anchors.verticalCenter: parent.verticalCenter
+              verticalAlignment: Text.AlignVCenter
+              horizontalAlignment: Text.AlignLeft
+            }
+            
+            MouseArea {
+              id: mouseArea
+              anchors.fill: parent
+              hoverEnabled: true
               
-              Text {
-                visible: !modelData.isSeparator
-                anchors.fill: parent
-                color: panel.colors.dark_on_background
-                text: modelData.text
-                anchors.left: parent.left
-                anchors.leftMargin: 10
-                anchors.verticalCenter: parent.verticalCenter
-                verticalAlignment: Text.AlignVCenter
-                horizontalAlignment: Text.AlignLeft
-              }
-              
-              MouseArea {
-                id: mouseArea
-                anchors.fill: parent
-                hoverEnabled: true
-                
-                onClicked: (event) => {
-                  if (event.button == Qt.LeftButton) {
-                    modelData.triggered()
-                    menu.visible = false
-                  }
+              onClicked: (event) => {
+                if (event.button == Qt.LeftButton) {
+                  modelData.triggered()
+                  menu.visible = false
                 }
               }
             }
@@ -138,24 +139,5 @@ MouseArea {
     anchors.centerIn: parent
     width: parent.width
     height: parent.height
-  }
-
-  Loader {
-    active: true
-    anchors.fill: trayIcon
-    sourceComponent: Item {
-    Desaturate {
-        id: desaturatedIcon
-        visible: true
-        anchors.fill: parent
-        source: trayIcon
-        desaturation: 0.8
-      }
-      ColorOverlay {
-        anchors.fill: desaturatedIcon
-        source: desaturatedIcon
-        color: panel.colors.dark_on_surface_variant
-      }
-    }
   }
 }
