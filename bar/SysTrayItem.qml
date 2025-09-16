@@ -51,7 +51,7 @@ MouseArea {
     anchor.edges: Edges.Top
     color: "transparent"
     implicitWidth: 200
-    implicitHeight: items.height + 8
+    implicitHeight: items.height + 14
     
     Timer {
       id: hideTimer
@@ -59,15 +59,6 @@ MouseArea {
       running: false
       repeat: false
       onTriggered: menu.visible = false
-    }
-    
-    MouseArea {
-      id: menuMouseArea
-      anchors.fill: parent
-      hoverEnabled: true
-      
-      onEntered: hideTimer.stop()
-      onExited: hideTimer.restart()
     }
 
     Rectangle {
@@ -77,21 +68,25 @@ MouseArea {
       implicitHeight: parent.height
       bottomLeftRadius: 16
       bottomRightRadius: 16
+      anchors.fill: parent
       
       ColumnLayout {
         id: items
         spacing: 6
         anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        
         
         Repeater {
           model: menuOpen.children
+          anchors.verticalCenter: parent.verticalCenter
           
           Rectangle {
             required property QsMenuEntry modelData
             color: mouseArea.containsMouse && !modelData.isSeparator ? panel.colors.dark_surface_container_high : panel.colors.dark_inverse_on_surface
             anchors.horizontalCenter: parent.horizontalCenter
             implicitWidth: menu.width - 12
-            implicitHeight: modelData.isSeparator ? 2 : 25
+            implicitHeight: modelData.isSeparator ? 2 : 26
             radius: 12
             
             // Smooth color transition
@@ -129,6 +124,17 @@ MouseArea {
           }
         }
       }
+    }
+
+    MouseArea {
+      id: menuMouseArea
+      anchors.fill: parent
+      hoverEnabled: true
+      acceptedButtons: Qt.NoButton  // Don't intercept mouse clicks
+      propagateComposedEvents: true  // Allow child elements to receive events
+      
+      onEntered: hideTimer.stop()
+      onExited: hideTimer.restart()
     }
   }
 

@@ -57,14 +57,6 @@ PopupWindow {
       menuRoot.visible = false
     }
   }
-
-  MouseArea {
-    id: menuMouseArea
-    anchors.fill: parent
-    hoverEnabled: false
-    onEntered: hideTimer.stop()
-    onExited: hideTimer.restart()
-  }
   
   Item {
     anchors.fill: parent
@@ -150,5 +142,16 @@ PopupWindow {
         }
       }
     }
+  }
+
+  MouseArea {
+    id: menuMouseArea
+    anchors.fill: parent
+    hoverEnabled: true
+    acceptedButtons: Qt.NoButton
+    propagateComposedEvents: true
+    
+    onEntered: hideTimer.stop()
+    onExited: hideTimer.restart()
   }
 }
