@@ -11,33 +11,35 @@ PopupWindow {
   implicitHeight: 600
   implicitWidth: 800
   color: "transparent"
-
+  
   property string fetchString
-
+  property string fetchPath: Quickshell.shellDir + "/scripts/sysfetch.sh"
+  
   Process {
     id: fetchRunner
-    command: ["/bin/bash", "~/.config/quickshell/sysfetch.sh"]
-    
+    command: [fetchPath]
+    running: true
     stdout: StdioCollector {
       onStreamFinished: {
         menuRoot.fetchString = this.text
         console.log(this.text)
       }
     }
-    
     stderr: StdioCollector {
       onStreamFinished: console.log(this.text)
     }
   }
-
+  
   Timer {
     id: fetchTimer
     interval: 10000
     running: true
     repeat: true
-    onTriggered: fetchRunner.running = true
+    onTriggered: {
+      fetchRunner.running = true
+    }
   }
-
+  
   Rectangle {
     id: menuIURoot
     anchors.fill: parent
@@ -45,46 +47,48 @@ PopupWindow {
     bottomRightRadius: 18
     color: panel.colors.dark_background
   }
-
+  
   Timer {
     id: hideTimer
     interval: 1000
     running: false
     repeat: false
-    onTriggered: menuRoot.visible = false
+    onTriggered: {
+      menuRoot.visible = false
+    }
   }
 
   MouseArea {
     id: menuMouseArea
     anchors.fill: parent
-    hoverEnabled: true
+    hoverEnabled: false
     onEntered: hideTimer.stop()
     onExited: hideTimer.restart()
   }
-
+  
   Item {
     anchors.fill: parent
     anchors.leftMargin: 12
     anchors.rightMargin: 12
     anchors.bottomMargin: 12
     anchors.topMargin: 8
-
+    
     RowLayout {
       spacing: 12
       anchors.fill: parent
-
+      
       // Left column
       ColumnLayout {
         spacing: 12
         Layout.fillHeight: true
         Layout.preferredWidth: parent.width * 0.8
-
+        
         // Top row with small square and wide rectangle
         RowLayout {
           spacing: 12
           Layout.fillWidth: true
           Layout.preferredHeight: parent.height * 0.235
-
+          
           Rectangle {
             id: profileIcon
             Layout.preferredWidth: parent.height
@@ -92,26 +96,28 @@ PopupWindow {
             color: panel.colors.dark_inverse_on_surface
             radius: 12
           }
-
+          
           Rectangle {
             id: fetchOutput
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
             color: panel.colors.dark_inverse_on_surface
             radius: 12
-
+            
             Text {
               id: fetchText
               anchors.fill: parent
               anchors.margins: 8
               text: menuRoot.fetchString
               font.family: "monospace"
+              font.bold: true
               wrapMode: Text.WrapAnywhere
-              color: "white"
+              textFormat: Text.RichText
+              color: panel.colors.dark_on_surface_variant
             }
           }
         }
-
+        
         // Large middle rectangle
         Rectangle {
           id: mediaControls
@@ -120,7 +126,7 @@ PopupWindow {
           color: panel.colors.dark_inverse_on_surface
           radius: 12
         }
-
+        
         // Bottom rectangle
         Rectangle {
           id: systemUsage
@@ -130,14 +136,18 @@ PopupWindow {
           radius: 12
         }
       }
-
-      // Right tall rectangle
+      
+      // Right tall rectangle with audio and brightness controls
       Rectangle {
         id: audioAndBrightness
         Layout.fillHeight: true
         Layout.preferredWidth: parent.width * 0.2
         color: panel.colors.dark_inverse_on_surface
         radius: 12
+        
+        AudioBrightnessControls {
+          anchors.fill: parent
+        }
       }
     }
   }
