@@ -117,6 +117,13 @@ PopupWindow {
           Layout.fillHeight: true
           color: panel.colors.dark_inverse_on_surface
           radius: 12
+          
+          Text {
+            anchors.centerIn: parent
+            color: "white"
+            font.pixelSize: 24
+            text: "mediaplayer comming soon"
+          }
         }
         
         // Bottom rectangle
@@ -137,7 +144,7 @@ PopupWindow {
         color: panel.colors.dark_inverse_on_surface
         radius: 12
         
-        AudioBrightnessControls {
+        SystemUsage {
           anchors.fill: parent
         }
       }
