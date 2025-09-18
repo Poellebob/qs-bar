@@ -5,7 +5,6 @@ import Quickshell.Services.SystemTray
 import Quickshell.Widgets
 import Quickshell.Hyprland
 import Qt5Compat.GraphicalEffects
-import qs.colors
 
 Item {
   id: pagerRoot

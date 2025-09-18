@@ -29,9 +29,9 @@ Item {
         id: volumeIcon
         text: defaultNode && defaultNode.audio.muted
           ? " 󰖁"
-          : (defaultNode && defaultNode.audio.volume >= 0.66
+          : (defaultNode && defaultNode.audio.volume >= 0.60
             ? " 󰕾"
-            : defaultNode && defaultNode.audio.volume >= 0.33
+            : defaultNode && defaultNode.audio.volume >= 0.20
             ? " 󰖀"
             : " 󰕿")
         font.pixelSize: panel.format.text_size
