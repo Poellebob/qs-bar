@@ -87,6 +87,10 @@ PopupWindow {
             Layout.preferredHeight: parent.height
             color: panel.colors.dark_inverse_on_surface
             radius: 12
+
+            DateDisplay{
+              anchors.fill: parent
+            }
           }
           
           Rectangle {
@@ -133,10 +137,6 @@ PopupWindow {
           Layout.preferredHeight: parent.height * 0.2
           color: panel.colors.dark_inverse_on_surface
           radius: 12
-
-          PowerProfile {
-            anchors.fill: parent
-          }
         }
       }
       
