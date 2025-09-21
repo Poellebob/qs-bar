@@ -137,6 +137,10 @@ PopupWindow {
           Layout.preferredHeight: parent.height * 0.2
           color: panel.colors.dark_inverse_on_surface
           radius: 12
+
+          NetworkBluetoothStatus {
+            anchors.fill: parent
+          }
         }
       }
       

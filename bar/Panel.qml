@@ -57,6 +57,14 @@ PanelWindow {
         Layout.alignment: Qt.AlignVCenter
       }
 
+      Bluetooth {
+        Layout.alignment: Qt.AlignVCenter
+      }
+
+      Network {
+        Layout.alignment: Qt.AlignVCenter
+      }
+
       Clock {
         Layout.alignment: Qt.AlignVCenter
       }
