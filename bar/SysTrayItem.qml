@@ -12,7 +12,7 @@ MouseArea {
   required property var bar
   required property SystemTrayItem item
   property bool targetMenuOpen: false
-  property int trayItemWidth: 16
+  property int trayItemWidth: panel.format.radius_xlarge
 
   anchors {
     verticalCenter: parent.verticalCenter
@@ -51,11 +51,11 @@ MouseArea {
     anchor.edges: Edges.Top
     color: "transparent"
     implicitWidth: 200
-    implicitHeight: items.height + 14
+    implicitHeight: items.height + panel.format.spacing_large + panel.format.spacing_small
     
     Timer {
       id: hideTimer
-      interval: 1000
+      interval: panel.format.interval_short
       running: false
       repeat: false
       onTriggered: menu.visible = false
@@ -66,13 +66,13 @@ MouseArea {
       color: panel.colors.dark_background
       implicitWidth: parent.width
       implicitHeight: parent.height
-      bottomLeftRadius: 16
-      bottomRightRadius: 16
+      bottomLeftRadius: panel.format.radius_xlarge
+      bottomRightRadius: panel.format.radius_xlarge
       anchors.fill: parent
       
       ColumnLayout {
         id: items
-        spacing: 6
+        spacing: panel.format.radius_medium
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         
@@ -85,9 +85,9 @@ MouseArea {
             required property QsMenuEntry modelData
             color: mouseArea.containsMouse && !modelData.isSeparator ? panel.colors.dark_surface_container_high : panel.colors.dark_inverse_on_surface
             anchors.horizontalCenter: parent.horizontalCenter
-            implicitWidth: menu.width - 12
-            implicitHeight: modelData.isSeparator ? 2 : 26
-            radius: 12
+            implicitWidth: menu.width - panel.format.spacing_large
+            implicitHeight: modelData.isSeparator ? 2 : panel.format.icon_size
+            radius: panel.format.radius_large
             
             // Smooth color transition
             Behavior on color {
@@ -103,7 +103,7 @@ MouseArea {
               color: panel.colors.dark_on_background
               text: modelData.text
               anchors.left: parent.left
-              anchors.leftMargin: 10
+              anchors.leftMargin: panel.format.font_size_small
               anchors.verticalCenter: parent.verticalCenter
               verticalAlignment: Text.AlignVCenter
               horizontalAlignment: Text.AlignLeft

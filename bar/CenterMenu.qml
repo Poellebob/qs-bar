@@ -22,17 +22,13 @@ PopupWindow {
     stdout: StdioCollector {
       onStreamFinished: {
         menuRoot.fetchString = this.text
-        console.log(this.text)
       }
-    }
-    stderr: StdioCollector {
-      onStreamFinished: console.log(this.text)
     }
   }
   
   Timer {
     id: fetchTimer
-    interval: 10000
+    interval: panel.format.interval_xlong
     running: true
     repeat: true
     onTriggered: {
@@ -43,14 +39,14 @@ PopupWindow {
   Rectangle {
     id: menuIURoot
     anchors.fill: parent
-    bottomLeftRadius: 18
-    bottomRightRadius: 18
+    bottomLeftRadius: panel.format.radius_xlarge + panel.format.spacing_small
+    bottomRightRadius: panel.format.radius_xlarge + panel.format.spacing_small
     color: panel.colors.dark_background
   }
   
   Timer {
     id: hideTimer
-    interval: 1000
+    interval: panel.format.interval_short
     running: false
     repeat: false
     onTriggered: {
@@ -60,24 +56,24 @@ PopupWindow {
   
   Item {
     anchors.fill: parent
-    anchors.leftMargin: 12
-    anchors.rightMargin: 12
-    anchors.bottomMargin: 12
-    anchors.topMargin: 8
+    anchors.leftMargin: panel.format.spacing_large
+    anchors.rightMargin: panel.format.spacing_large
+    anchors.bottomMargin: panel.format.spacing_large
+    anchors.topMargin: panel.format.spacing_medium
     
     RowLayout {
-      spacing: 12
+      spacing: panel.format.spacing_large
       anchors.fill: parent
       
       // Left column
       ColumnLayout {
-        spacing: 12
+        spacing: panel.format.spacing_large
         Layout.fillHeight: true
         Layout.preferredWidth: parent.width * 0.8
         
         // Top row with small square and wide rectangle
         RowLayout {
-          spacing: 12
+          spacing: panel.format.spacing_large
           Layout.fillWidth: true
           Layout.preferredHeight: parent.height * 0.235
           
@@ -86,7 +82,7 @@ PopupWindow {
             Layout.preferredWidth: parent.height
             Layout.preferredHeight: parent.height
             color: panel.colors.dark_inverse_on_surface
-            radius: 12
+            radius: panel.format.radius_large
 
             DateDisplay{
               anchors.fill: parent
@@ -98,12 +94,12 @@ PopupWindow {
             Layout.fillWidth: true
             Layout.preferredHeight: parent.height
             color: panel.colors.dark_inverse_on_surface
-            radius: 12
+            radius: panel.format.radius_large
             
             Text {
               id: fetchText
               anchors.fill: parent
-              anchors.margins: 8
+              anchors.margins: panel.format.spacing_medium
               text: menuRoot.fetchString
               font.family: "monospace"
               font.bold: true
@@ -120,13 +116,10 @@ PopupWindow {
           Layout.fillWidth: true
           Layout.fillHeight: true
           color: panel.colors.dark_inverse_on_surface
-          radius: 12
+          radius: panel.format.radius_large
           
-          Text {
-            anchors.centerIn: parent
-            color: "white"
-            font.pixelSize: 24
-            text: "mediaplayer comming soon"
+          MediaPlayer {
+            anchors.fill: parent
           }
         }
         
@@ -136,7 +129,7 @@ PopupWindow {
           Layout.fillWidth: true
           Layout.preferredHeight: parent.height * 0.2
           color: panel.colors.dark_inverse_on_surface
-          radius: 12
+          radius: panel.format.radius_large
 
           NetworkBluetoothStatus {
             anchors.fill: parent
@@ -150,7 +143,7 @@ PopupWindow {
         Layout.fillHeight: true
         Layout.preferredWidth: parent.width * 0.2
         color: panel.colors.dark_inverse_on_surface
-        radius: 12
+        radius: panel.format.radius_large
         
         SystemUsage {
           anchors.fill: parent

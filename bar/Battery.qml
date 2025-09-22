@@ -14,16 +14,16 @@ Item {
     id: rect
     anchors.centerIn: parent
     implicitHeight: panel.format.module_height
-    implicitWidth: column.implicitWidth + 16
+    implicitWidth: column.implicitWidth + panel.format.radius_xlarge
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
     border.color: panel.colors.dark_primary
     border.width: UPower.onBattery ? 0 : 1
 
     RowLayout {
       id: column
       anchors.centerIn: parent
-      spacing: 2
+      spacing: panel.format.spacing_tiny
 
       Text {
         text: batteryRoot.batteryIcon(UPower.displayDevice.iconName)
@@ -43,7 +43,7 @@ Item {
   }
 
   Timer {
-    interval: 1000
+    interval: panel.format.interval_xlong
     running: true
     repeat: true
     onTriggered: {

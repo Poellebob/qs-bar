@@ -25,10 +25,10 @@ PanelWindow {
     RowLayout {
       anchors {
         left: parent.left
-        leftMargin: 8
+        leftMargin: panel.format.spacing_medium
         verticalCenter: parent.verticalCenter
       }
-      spacing: 8
+      spacing: panel.format.spacing_medium
 
       Text {
         text: "󰣇"
@@ -47,7 +47,7 @@ PanelWindow {
         horizontalCenter: parent.horizontalCenter
         verticalCenter: parent.verticalCenter
       }
-      spacing: 8
+      spacing: panel.format.spacing_medium
 
       Audio {
         Layout.alignment: Qt.AlignCenter
@@ -85,10 +85,10 @@ PanelWindow {
     RowLayout {
       anchors {
         right: parent.right
-        rightMargin: 8
+        rightMargin: panel.format.spacing_medium
         verticalCenter: parent.verticalCenter
       }
-      spacing: 8
+      spacing: panel.format.spacing_medium
 
       Pager {
         Layout.alignment: Qt.AlignVCenter

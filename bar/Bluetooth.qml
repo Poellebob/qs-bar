@@ -12,14 +12,14 @@ Item {
   Rectangle {
     id: rect
     implicitHeight: panel.format.module_height
-    implicitWidth: row.implicitWidth + 8
+    implicitWidth: row.implicitWidth + panel.format.spacing_medium
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
 
     RowLayout {
       id: row
       anchors.centerIn: parent
-      spacing: 4
+      spacing: panel.format.spacing_small
 
       Text {
         id: bluetoothIcon
@@ -110,14 +110,14 @@ Item {
   }
 
   Timer {
-    interval: 5000
+    interval: panel.format.interval_long
     running: true
     repeat: true
     onTriggered: bluetoothProcess.running = true
   }
 
   Timer {
-    interval: 3000
+    interval: panel.format.interval_medium
     running: bluetoothRoot.connectedDevices.length > 1
     repeat: true
     onTriggered: bluetoothRoot.updateDisplayText()

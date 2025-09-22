@@ -11,9 +11,9 @@ Item {
   Rectangle {
     id: rect
     implicitHeight: panel.format.module_height
-    implicitWidth: text.implicitWidth + 8
+    implicitWidth: text.implicitWidth + panel.format.spacing_medium
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
 
     Text {
       id: text

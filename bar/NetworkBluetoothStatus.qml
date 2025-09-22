@@ -3,16 +3,14 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
-Rectangle {
+Item {
   id: statusRoot
-  width: 400
-  height: 100
-  color: "transparent"
+  anchors.fill: parent
 
   RowLayout {
     anchors.fill: parent
-    anchors.margins: 12
-    spacing: 12
+    anchors.margins: panel.format.spacing_large
+    spacing: panel.format.spacing_large
 
     // Left side - Network Status
     Rectangle {
@@ -20,7 +18,7 @@ Rectangle {
       Layout.fillHeight: true
       Layout.fillWidth: true
       color: panel.colors.dark_inverse_on_surface
-      radius: 12
+      radius: panel.format.radius_large
       border.width: 1
       border.color: panel.colors.dark_primary
       
@@ -39,7 +37,7 @@ Rectangle {
       }
       
       Timer {
-        interval: 5000
+        interval: panel.format.interval_long
         running: true
         repeat: true
         onTriggered: networkProcess.running = true
@@ -47,17 +45,17 @@ Rectangle {
       
       Column {
         anchors.fill: parent
-        anchors.margins: 8
-        spacing: 8
+        anchors.margins: panel.format.spacing_medium
+        spacing: panel.format.spacing_medium
         
         RowLayout {
           width: parent.width
-          spacing: 8
+          spacing: panel.format.spacing_medium
           
           Text {
             text: "󰖩"
             font.family: "CommitMono Nerd Font Mono"
-            font.pixelSize: 20
+            font.pixelSize: panel.format.font_size_large
             font.bold: true
             color: panel.colors.dark_primary
           }
@@ -66,7 +64,7 @@ Rectangle {
             text: "Network"
             font.family: "CommitMono Nerd Font Mono"
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: panel.format.font_size_medium
             color: panel.colors.dark_on_surface_variant
           }
         }
@@ -94,7 +92,7 @@ Rectangle {
             return activeConnections.slice(0, 2).join('\n')
           }
           font.family: "CommitMono Nerd Font Mono"
-          font.pixelSize: 10
+          font.pixelSize: panel.format.font_size_small
           color: panel.colors.dark_on_surface_variant
           wrapMode: Text.WrapAtWordBoundaryOrAnywhere
           elide: Text.ElideRight
@@ -108,7 +106,7 @@ Rectangle {
       Layout.fillHeight: true
       Layout.fillWidth: true
       color: panel.colors.dark_inverse_on_surface
-      radius: 12
+      radius: panel.format.radius_large
       border.width: 1
       border.color: panel.colors.dark_secondary
       
@@ -143,7 +141,7 @@ Rectangle {
       }
       
       Timer {
-        interval: 5000
+        interval: panel.format.interval_long
         running: true
         repeat: true
         onTriggered: bluetoothProcess.running = true
@@ -151,17 +149,17 @@ Rectangle {
       
       Column {
         anchors.fill: parent
-        anchors.margins: 8
-        spacing: 8
+        anchors.margins: panel.format.spacing_medium
+        spacing: panel.format.spacing_medium
         
         RowLayout {
           width: parent.width
-          spacing: 8
+          spacing: panel.format.spacing_medium
           
           Text {
             text: "󰂯"
             font.family: "CommitMono Nerd Font Mono"
-            font.pixelSize: 20
+            font.pixelSize: panel.format.font_size_large
             font.bold: true
             color: panel.colors.dark_secondary
           }
@@ -170,7 +168,7 @@ Rectangle {
             text: "Bluetooth"
             font.family: "CommitMono Nerd Font Mono"
             font.bold: true
-            font.pixelSize: 12
+            font.pixelSize: panel.format.font_size_medium
             color: panel.colors.dark_on_surface_variant
           }
         }
@@ -199,7 +197,7 @@ Rectangle {
             return connectedDevices.slice(0, 2).join('\n')
           }
           font.family: "CommitMono Nerd Font Mono"
-          font.pixelSize: 10
+          font.pixelSize: panel.format.font_size_small
           color: panel.colors.dark_on_surface_variant
           wrapMode: Text.WrapAtWordBoundaryOrAnywhere
           elide: Text.ElideRight

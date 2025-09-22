@@ -14,15 +14,15 @@ Item {
   Rectangle {
     id: rect
     color: panel.colors.dark_surface_variant
-    radius: 4
-    implicitWidth: row.implicitWidth + 8
+    radius: panel.format.radius_small
+    implicitWidth: row.implicitWidth + panel.format.spacing_medium
     implicitHeight: panel.format.module_height
 
     RowLayout {
       id: row
       anchors.fill: parent
-      anchors.margins: 4
-      spacing: 4
+      anchors.margins: panel.format.spacing_small
+      spacing: panel.format.spacing_small
 
       Repeater {
         model: Hyprland.workspaces
@@ -30,7 +30,7 @@ Item {
           visible: (panel.screen.name === modelData.monitor.name) && modelData.id >= 1
           color: modelData.active ? panel.colors.dark_primary : panel.colors.dark_secondary
           
-          implicitHeight: panel.format.module_height - 4
+          implicitHeight: panel.format.module_height - panel.format.spacing_small
           implicitWidth: implicitHeight
           anchors.verticalCenter: parent.verticalCenter
           radius: panel.format.module_radius

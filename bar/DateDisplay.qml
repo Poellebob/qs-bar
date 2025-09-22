@@ -14,7 +14,7 @@ Item {
   // Timer to update the time every second
   Timer {
     id: timeTimer
-    interval: 1000
+    interval: panel.format.interval_short
     running: true
     repeat: true
     onTriggered: {
@@ -35,10 +35,10 @@ Item {
   
   RowLayout {
     anchors.fill: parent
-    anchors.rightMargin: 12
-    anchors.leftMargin: 12
-    anchors.topMargin: 12
-    anchors.bottomMargin: 24
+    anchors.rightMargin: panel.format.spacing_large
+    anchors.leftMargin: panel.format.spacing_large
+    anchors.topMargin: panel.format.spacing_large
+    anchors.bottomMargin: panel.format.spacing_large * 2
     spacing: 0
     
     // Centered clock display
@@ -46,13 +46,13 @@ Item {
       Layout.fillHeight: true
       Layout.fillWidth: true
       Layout.alignment: Qt.AlignCenter
-      spacing: 8
+      spacing: panel.format.spacing_medium
       
       Text {
         Layout.alignment: Qt.AlignHCenter
         text: dateRoot.currentTime
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 22
+        font.pixelSize: panel.format.font_size_xlarge
         font.bold: true
         color: panel.colors.dark_on_surface_variant
         horizontalAlignment: Text.AlignHCenter
@@ -60,7 +60,7 @@ Item {
       
       Rectangle {
         Layout.alignment: Qt.AlignHCenter
-        Layout.topMargin: 4
+        Layout.topMargin: panel.format.spacing_small
         implicitWidth: 80
         implicitHeight: 2
         color: panel.colors.dark_primary
@@ -71,7 +71,7 @@ Item {
         Layout.alignment: Qt.AlignHCenter
         text: dateRoot.currentDay
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 12
+        font.pixelSize: panel.format.font_size_medium
         font.bold: true
         color: panel.colors.dark_on_surface_variant
         horizontalAlignment: Text.AlignHCenter
@@ -81,7 +81,7 @@ Item {
         Layout.alignment: Qt.AlignHCenter
         text: dateRoot.currentDate
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 12
+        font.pixelSize: panel.format.font_size_medium
         font.bold: true
         color: panel.colors.dark_on_surface_variant
         horizontalAlignment: Text.AlignHCenter

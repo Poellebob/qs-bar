@@ -12,14 +12,14 @@ Item {
   Rectangle {
     id: rect
     implicitHeight: panel.format.module_height
-    implicitWidth: row.implicitWidth + 8
+    implicitWidth: row.implicitWidth + panel.format.spacing_medium
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
 
     RowLayout {
       id: row
       anchors.centerIn: parent
-      spacing: 4
+      spacing: panel.format.spacing_small
 
       Text {
         id: networkIcon
@@ -168,7 +168,7 @@ Item {
   }
 
   Timer {
-    interval: 5000
+    interval: panel.format.interval_long
     running: true
     repeat: true
     onTriggered: {
@@ -176,10 +176,9 @@ Item {
       fallbackTimer.start()
     }
   }
-
   Timer {
     id: fallbackTimer
-    interval: 1000
+    interval: panel.format.interval_short
     running: false
     onTriggered: {
       if (!networkRoot.isConnected) {
@@ -189,7 +188,7 @@ Item {
   }
 
   Timer {
-    interval: 10000
+    interval: panel.format.interval_longest
     running: networkRoot.connectionType === "wifi" && networkRoot.isConnected
     repeat: true
     onTriggered: wifiSignalProcess.running = true

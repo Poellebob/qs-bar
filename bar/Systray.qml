@@ -11,18 +11,18 @@ Item {
   Rectangle {
     id: rect
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
     anchors.centerIn: parent
 
     // Let size follow RowLayout + margins
-    implicitWidth: rowLayout.implicitWidth + 8
+    implicitWidth: rowLayout.implicitWidth + panel.format.spacing_medium
     implicitHeight: panel.format.module_height
 
     RowLayout {
       id: rowLayout
-      anchors.margins: 4
+      anchors.margins: panel.format.spacing_small
       anchors.fill: parent
-      spacing: 4
+      spacing: panel.format.spacing_small
 
       Repeater {
         model: SystemTray.items

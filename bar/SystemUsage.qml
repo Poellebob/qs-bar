@@ -12,8 +12,8 @@ Item {
 
   RowLayout {
     anchors.fill: parent
-    anchors.rightMargin: 12
-    anchors.leftMargin: 12
+    anchors.rightMargin: panel.format.spacing_large
+    anchors.leftMargin: panel.format.spacing_large
     anchors.topMargin: 24
     anchors.bottomMargin: 24
     spacing: 0
@@ -25,7 +25,6 @@ Item {
       stdout: StdioCollector {
         onStreamFinished: {
           sysUsageRoot.cpuPercent = parseFloat(this.text)
-          console.log("CPU:", this.text)
         }
       }
     }
@@ -37,7 +36,6 @@ Item {
       stdout: StdioCollector {
         onStreamFinished: {
           sysUsageRoot.ramPercent = parseFloat(this.text)
-          console.log("RAM:", this.text)
         }
       }
     }
@@ -49,14 +47,13 @@ Item {
       stdout: StdioCollector {
         onStreamFinished: {
           sysUsageRoot.diskPercent = parseFloat(this.text)
-          console.log("Disk:", this.text)
         }
       }
     }
 
     Timer {
       id: usageTimer
-      interval: 1000
+      interval: panel.format.interval_short
       running: true
       repeat: true
       onTriggered: {
@@ -70,14 +67,14 @@ Item {
     ColumnLayout {
       Layout.fillHeight: true
       Layout.preferredWidth: parent.width * (1 / 3)
-      spacing: 12
+      spacing: panel.format.spacing_large
 
       Rectangle {
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignHCenter
-        implicitWidth: 12
+        implicitWidth: panel.format.spacing_large
         color: panel.colors.dark_background
-        radius: 6
+        radius: panel.format.radius_medium
 
         Rectangle {
           anchors.bottom: parent.bottom
@@ -91,12 +88,12 @@ Item {
 
       Text {
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredHeight: 10
-        Layout.bottomMargin: 10
+        Layout.preferredHeight: panel.format.font_size_small
+        Layout.bottomMargin: panel.format.font_size_small
         horizontalAlignment: Text.AlignHCenter
         text: ""
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 22
+        font.pixelSize: panel.format.font_size_xlarge
         font.bold: true
         color: panel.colors.dark_on_surface_variant
       }
@@ -106,14 +103,14 @@ Item {
     ColumnLayout {
       Layout.fillHeight: true
       Layout.preferredWidth: parent.width * (1 / 3)
-      spacing: 12
+      spacing: panel.format.spacing_large
 
       Rectangle {
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignHCenter
-        implicitWidth: 12
+        implicitWidth: panel.format.spacing_large
         color: panel.colors.dark_background
-        radius: 6
+        radius: panel.format.radius_medium
 
         Rectangle {
           anchors.bottom: parent.bottom
@@ -127,12 +124,12 @@ Item {
 
       Text {
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredHeight: 10
-        Layout.bottomMargin: 10
+        Layout.preferredHeight: panel.format.font_size_small
+        Layout.bottomMargin: panel.format.font_size_small
         horizontalAlignment: Text.AlignHCenter
         text: ""
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 22
+        font.pixelSize: panel.format.font_size_xlarge
         font.bold: true
         color: panel.colors.dark_on_surface_variant
       }
@@ -142,14 +139,14 @@ Item {
     ColumnLayout {
       Layout.fillHeight: true
       Layout.preferredWidth: parent.width * (1 / 3)
-      spacing: 12
+      spacing: panel.format.spacing_large
 
       Rectangle {
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignHCenter
-        implicitWidth: 12
+        implicitWidth: panel.format.spacing_large
         color: panel.colors.dark_background
-        radius: 6
+        radius: panel.format.radius_medium
 
         Rectangle {
           anchors.bottom: parent.bottom
@@ -163,12 +160,12 @@ Item {
 
       Text {
         Layout.alignment: Qt.AlignHCenter
-        Layout.preferredHeight: 10
-        Layout.bottomMargin: 10
+        Layout.preferredHeight: panel.format.font_size_small
+        Layout.bottomMargin: panel.format.font_size_small
         horizontalAlignment: Text.AlignHCenter
         text: "󰋊"
         font.family: "CommitMono Nerd Font Mono"
-        font.pixelSize: 20
+        font.pixelSize: panel.format.font_size_large
         font.bold: true
         color: panel.colors.dark_on_surface_variant
       }

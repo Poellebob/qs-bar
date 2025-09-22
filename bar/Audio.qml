@@ -15,9 +15,9 @@ Item {
   Rectangle {
     id: rect
     color: panel.colors.dark_surface_variant
-    radius: 4
+    radius: panel.format.radius_small
     implicitHeight: panel.format.module_height
-    implicitWidth: row.implicitWidth + 8
+    implicitWidth: row.implicitWidth + panel.format.spacing_medium
 
     RowLayout {
       id: row
