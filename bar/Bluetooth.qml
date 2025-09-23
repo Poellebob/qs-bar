@@ -118,7 +118,7 @@ Item {
 
   Timer {
     interval: panel.format.interval_medium
-    running: bluetoothRoot.connectedDevices.length > 1
+    running: true
     repeat: true
     onTriggered: bluetoothRoot.updateDisplayText()
   }
