@@ -20,7 +20,7 @@ Item {
       anchors.top: parent.top
 
       Repeater {
-        model: Mpris
+        model: Mpris.players
 
         Rectangle {
           id: tabRoot
@@ -29,7 +29,7 @@ Item {
 
           width: 32
           height: 32
-          color: "white"
+          color: "transparent"
 
           IconImage {
             anchors.centerIn: parent
@@ -37,7 +37,7 @@ Item {
             height: 28
             //fillMode: Image.PreserveAspectFit
 
-            source: modelData.desktopEntry
+            source: Quickshell.iconPath(DesktopEntries.byId(modelData.desktopEntry)?.icon)
 
             //source: "media-playback-start"
           }

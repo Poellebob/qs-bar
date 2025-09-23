@@ -141,7 +141,7 @@ PopupWindow {
       Rectangle {
         id: audioAndBrightness
         Layout.fillHeight: true
-        Layout.preferredWidth: parent.width * 0.2
+        Layout.preferredWidth: parent.height * 0.235
         color: panel.colors.dark_inverse_on_surface
         radius: panel.format.radius_large
         
