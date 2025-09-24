@@ -11,6 +11,7 @@ PanelWindow {
   readonly property Colors colors: Colors {}
 
   implicitHeight: format.panel_hight
+  aboveWindows: true
 
   anchors {
     top: true
@@ -22,20 +23,37 @@ PanelWindow {
     anchors.fill: parent
     color: panel.colors.dark_background
 
+    Rectangle {
+      id: leftMenu
+      anchors {
+        top: parent.top
+        bottom: parent.bottom
+        left: parent.left
+      }
+
+      implicitWidth: 35
+      color: panel.colors.dark_surface_variant
+
+      bottomRightRadius: panel.format.radius_large
+      topRightRadius: panel.format.radius_large
+
+      Text {
+        text: "󰣇  "
+        color: panel.colors.dark_on_background
+        font.pixelSize: panel.format.icon_size
+        anchors.centerIn: parent
+      }
+    }
+
+
     RowLayout {
       anchors {
-        left: parent.left
+        left: leftMenu.right
         leftMargin: panel.format.spacing_medium
         verticalCenter: parent.verticalCenter
       }
       spacing: panel.format.spacing_medium
 
-      Text {
-        text: "󰣇"
-        color: panel.colors.dark_on_background
-        font.pixelSize: panel.format.icon_size
-        Layout.alignment: Qt.AlignVCenter
-      }
 
       Systray {
         Layout.alignment: Qt.AlignVCenter

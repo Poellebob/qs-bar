@@ -83,6 +83,13 @@ Item {
           implicitWidth: parent.width
           height: (parent.height / 100) * sysUsageRoot.cpuPercent
           radius: parent.radius
+
+          Behavior on height {
+            NumberAnimation {
+              duration: 100
+              easing.type: Easing.OutCubic
+            }
+          }
         }
       }
 
@@ -119,6 +126,13 @@ Item {
           implicitWidth: parent.width
           height: (parent.height / 100) * sysUsageRoot.ramPercent
           radius: parent.radius
+
+          Behavior on height {
+            NumberAnimation {
+              duration: 100
+              easing.type: Easing.OutCubic
+            }
+          }
         }
       }
 
@@ -155,6 +169,13 @@ Item {
           implicitWidth: parent.width
           height: (parent.height / 100) * sysUsageRoot.diskPercent
           radius: parent.radius
+
+          Behavior on height {
+            NumberAnimation {
+              duration: 100
+              easing.type: Easing.OutCubic
+            }
+          }
         }
       }
 

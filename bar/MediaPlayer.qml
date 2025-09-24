@@ -3,10 +3,12 @@ import Quickshell.Services.Mpris
 import QtQuick
 import QtQuick.Layouts
 import Quickshell.Widgets
+import qs.components
 
 Item {
   id: mediaPlayerRoot
-  property MprisPlayer player: Mpris.players[0]
+  property MprisPlayer player: Mpris.players.values[0]
+  property real position: 0
 
   ColumnLayout {
     anchors.fill: parent
@@ -25,11 +27,11 @@ Item {
         Rectangle {
           id: tabRoot
           required property MprisPlayer modelData
-          visible: true
+          visible: modelData.trackArtUrl ? true : false
           implicitHeight: icon.height + panel.format.radius_small
           Layout.fillWidth: true
           radius: panel.format.radius_large
-          color: mediaPlayerRoot.player === modelData ? panel.colors.dark_surface : panel.colors.dark_surface_variant
+          color: mediaPlayerRoot.player === modelData ? panel.colors.dark_surface : (mouseArea.containsMouse ? panel.colors.dark_surface : panel.colors.dark_surface_variant)
 
           IconImage {
             id: icon
@@ -62,19 +64,10 @@ Item {
           }
 
           MouseArea {
+            id: mouseArea
             anchors.fill: parent
             hoverEnabled: true
-            propagateComposedEvents: true
-            onEntered: {
-              // Don't change color on hover for selected tab
-              if (mediaPlayerRoot.player !== modelData) {
-                tabRoot.color = panel.colors.dark_surface
-              }
-            }
-            onExited: {
-              // Reset color based on selection state
-              tabRoot.color = mediaPlayerRoot.player === modelData ? panel.colors.dark_surface : panel.colors.dark_surface_variant
-            }
+
             onClicked: {
               mediaPlayerRoot.player = modelData
               mouse.accepted = true
@@ -137,8 +130,8 @@ Item {
               id: trackTitle
               Layout.fillWidth: true
               text: mediaPlayerRoot.player?.trackTitle ?? "No track"
-              color: panel.colors.text_primary
-              font.pixelSize: panel.format.text_large
+              color: panel.colors.dark_on_surface_variant
+              font.pixelSize: panel.format.text_size
               font.bold: true
               elide: Text.ElideRight
               maximumLineCount: 1
@@ -147,9 +140,9 @@ Item {
             Text {
               id: trackArtist
               Layout.fillWidth: true
-              text: mediaPlayerRoot.player?.trackArtists?.join(", ") ?? "Unknown artist"
-              color: panel.colors.text_secondary
-              font.pixelSize: panel.format.text_medium
+              text: mediaPlayerRoot.player?.trackArtists ?? "Unknown artist"
+              color: panel.colors.dark_outline
+              font.pixelSize: panel.format.text_size
               elide: Text.ElideRight
               maximumLineCount: 1
             }
@@ -158,8 +151,8 @@ Item {
               id: trackAlbum
               Layout.fillWidth: true
               text: mediaPlayerRoot.player?.trackAlbum ?? ""
-              color: panel.colors.text_tertiary
-              font.pixelSize: panel.format.text_small
+              color: panel.colors.dark_surface_bright
+              font.pixelSize: panel.format.text_size
               elide: Text.ElideRight
               maximumLineCount: 1
               visible: text !== ""
@@ -179,14 +172,14 @@ Item {
               color: panel.colors.dark_surface
 
               Rectangle {
-                width: parent.width * Math.max(0, Math.min(1, (mediaPlayerRoot.player?.position ?? 0) / (mediaPlayerRoot.player?.length ?? 1)))
+                width: parent.width * (mediaPlayerRoot.position ?? 0) / (mediaPlayerRoot.player?.length ?? 1)
                 height: parent.height
                 radius: parent.radius
                 color: panel.colors.accent_primary
                 
                 Behavior on width {
                   NumberAnimation {
-                    duration: 100
+                    duration: 1000
                     easing.type: Easing.OutCubic
                   }
                 }
@@ -197,7 +190,7 @@ Item {
               Layout.fillWidth: true
 
               Text {
-                text: formatTime(mediaPlayerRoot.player?.position ?? 0)
+                text: formatTime(mediaPlayerRoot.position ?? 0)
                 color: panel.colors.text_tertiary
                 font.pixelSize: panel.format.text_tiny
               }
@@ -217,7 +210,16 @@ Item {
             Layout.alignment: Qt.AlignHCenter
             spacing: panel.format.spacing_medium
 
-            // Previous Button
+            IconButton {
+              width: panel.format.icon_size
+              height: panel.format.icon_size
+              icon: mediaPlayerRoot.player?.shuffle ? Quickshell.iconPath("media-playlist-shuffle") : Quickshell.iconPath("media-playlist-no-shuffle")
+              enabled: mediaPlayerRoot.player?.shuffleSupported
+              onClicked: {
+                mediaPlayerRoot.player.shuffle = !mediaPlayerRoot.player.shuffle
+              }
+            }
+
             IconButton {
               width: panel.format.icon_size
               height: panel.format.icon_size
@@ -226,7 +228,6 @@ Item {
               onClicked: mediaPlayerRoot.player?.previous()
             }
 
-            // Play/Pause Button
             IconButton {
               width: panel.format.big_icon_size
               height: panel.format.big_icon_size
@@ -241,7 +242,6 @@ Item {
               onClicked: mediaPlayerRoot.player?.togglePlaying() 
             }
 
-            // Next Button
             IconButton {
               width: panel.format.icon_size
               height: panel.format.icon_size
@@ -249,54 +249,56 @@ Item {
               enabled: mediaPlayerRoot.player?.canGoNext ?? false
               onClicked: mediaPlayerRoot.player?.next()
             }
+
+            IconButton {
+              width: panel.format.icon_size
+              height: panel.format.icon_size
+              icon: {
+                if(mediaPlayerRoot.player?.loopState === MprisLoopState.Playlist) {
+                  return Quickshell.iconPath("media-playlist-repeat")
+                }
+                else if (mediaPlayerRoot.player?.loopState === MprisLoopState.Track) {
+                  return Quickshell.iconPath("media-repeat-single")
+                }
+                else if(mediaPlayerRoot.player?.loopState === MprisLoopState.None) {
+                  return Quickshell.iconPath("media-repeat-none")
+                }
+              }
+              enabled: mediaPlayerRoot.player?.loopSupported
+              onClicked: {
+                if(mediaPlayerRoot.player?.loopState === MprisLoopState.Playlist) {
+                  mediaPlayerRoot.player.loopState = MprisLoopState.Track
+                }
+                else if (mediaPlayerRoot.player?.loopState === MprisLoopState.Track) {
+                  mediaPlayerRoot.player.loopState = MprisLoopState.None
+                }
+                else if(mediaPlayerRoot.player?.loopState === MprisLoopState.None) {
+                  mediaPlayerRoot.player.loopState = MprisLoopState.Playlist
+                }
+              }
+            }
           }
         }
       }
     }
   }
 
-  // Helper function to format time
-  function formatTime(microseconds) {
-    var seconds = Math.floor(microseconds / 1000000);
-    var minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+  Timer {
+    running: true
+    repeat: true
+    interval: 100
+
+    onTriggered: {
+      mediaPlayerRoot.position = mediaPlayerRoot.player?.position
+    }
   }
 
-  // Simple IconButton component if not available
-  component IconButton: Rectangle {
-    property string icon
-    property bool enabled: true
-    signal clicked()
-    
-    radius: panel.format.radius_small
-    color: enabled ? (mouseArea.containsMouse ? panel.colors.dark_surface : "transparent") : "transparent"
-    opacity: enabled ? 1.0 : 0.5
-    
-    IconImage {
-      anchors.centerIn: parent
-      width: parent.width * 0.6
-      height: parent.height * 0.6
-      source: icon
-    }
-    
-    MouseArea {
-      id: mouseArea
-      anchors.fill: parent
-      enabled: parent.enabled
-      hoverEnabled: true
-      propagateComposedEvents: true
-      onClicked: {
-        parent.clicked()
-        mouse.accepted = true
-      }
-    }
-    
-    Behavior on color {
-      ColorAnimation {
-        duration: 150
-        easing.type: Easing.OutCubic
-      }
-    }
+  // Helper function to format time
+  function formatTime(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var hours = Math.floor(minutes / 60);
+    minutes = minutes % 60;
+    seconds = seconds % 60;
+    return (hours > 0 ?? hours + ":") + minutes + ":" + (seconds < 10 ? "0" : "") + Math.floor(seconds);
   }
 }
